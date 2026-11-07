@@ -24,7 +24,7 @@ export default function EventsScreen() {
     edges={['top', 'bottom']}>
       <ScreenHeader title="Events" showBack />
       <TextInput
-        placeholder="Search events..."
+        placeholder="Search events"
         value={query}
         onChangeText={setQuery}
           style={{
@@ -35,6 +35,9 @@ export default function EventsScreen() {
     marginBottom: 16,
   }}
       />
+      <Text style={{ marginBottom: 12, fontSize: 14 }}>
+        Long-press an event to save it. Saved: {savedIds.length}
+      </Text>
       <FlatList
         data={filteredEvents}
         keyExtractor={(item) => String(item.id)}
@@ -48,7 +51,7 @@ export default function EventsScreen() {
         )}
         ListEmptyComponent={
           <Text style={{ textAlign: 'center', marginTop: 24 }}>
-            No events found
+            No events match
           </Text>
         }
       />
