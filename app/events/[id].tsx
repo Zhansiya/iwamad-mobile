@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { events } from '../../src/data/events';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Stack } from 'expo-router';
+import ScreenHeader from '../../src/components/ScreenHeader';
 
 export default function EventDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -32,6 +33,7 @@ export default function EventDetailsScreen() {
       edges={['top', 'bottom']}
       style={{ flex: 1, padding: 20 }}
     >
+      <ScreenHeader title={event.title} showBack />
       <Stack.Screen options={{ title: event.title }} />
 
       <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16 }}>
