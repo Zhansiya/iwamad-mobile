@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
+    "@tanstack/react-query": "^5.107.1",
     "expo": "~58.0.19",
     "expo-constants": "~58.0.15",
     "expo-linking": "~58.0.16",
@@ -19,14 +20,12 @@
     "@types/react": "~19.3.0",
     "typescript": "~6.0.3"
   },
-
-"scripts": {
-  "start": "expo start",
-  "android": "expo start --android",
-  "ios": "expo start --ios",
-  "web": "expo start --web",
-  "export:web": "expo export --platform web --output-dir docs && node -e \"require('fs').writeFileSync('docs/.nojekyll',''); require('fs').copyFileSync('docs/index.html','docs/404.html')\""
-},
-"private": true
-
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "export:web": "expo export --platform web --output-dir docs && node -e \"require('fs').writeFileSync('docs/.nojekyll',''); require('fs').copyFileSync('docs/index.html','docs/404.html')\""
+  },
+  "private": true
 }
