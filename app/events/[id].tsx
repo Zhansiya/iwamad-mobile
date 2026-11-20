@@ -2,9 +2,9 @@
 import { useLocalSearchParams, Stack } from 'expo-router';
 import { View, Text, ActivityIndicator, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { useEvents } from '../../src/hooks/useEvents';
 import ScreenHeader from '../../src/components/ScreenHeader';
+import HolidayNote from '../../src/components/HolidayNote';
 
 export default function EventDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -96,6 +96,8 @@ export default function EventDetailsScreen() {
       <Text style={{ fontSize: 16, marginBottom: 8 }}>
         Date: {event.date}
       </Text>
+
+      <HolidayNote date={event.date} />
 
       <Text style={{ fontSize: 16, marginBottom: 8 }}>
         Place: {event.place}

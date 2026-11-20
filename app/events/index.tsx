@@ -1,4 +1,3 @@
-
 import {
   View,
   FlatList,
@@ -10,14 +9,14 @@ import {
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import EventRow from '../../src/components/EventRow';
 import ScreenHeader from '../../src/components/ScreenHeader';
 import { useEvents } from '../../src/hooks/useEvents';
+import { useSavedIds } from '../../src/hooks/useSavedIds';
 
 export default function EventsScreen() {
   const [query, setQuery] = useState('');
-  const [savedIds, setSavedIds] = useState<number[]>([]);
+  const { savedIds, toggleSaved } = useSavedIds();
 
   const {
     data: events = [],
@@ -32,15 +31,8 @@ export default function EventsScreen() {
     event.title.toLowerCase().includes(query.toLowerCase().trim())
   );
 
-  function toggleSaved(id: number) {
-    setSavedIds((current) =>
-      current.includes(id)
-        ? current.filter((savedId) => savedId !== id)
-        : [...current, id]
-    );
-  }
 
-  if (isError && isPending) {
+  if (isError) {
     return (
       <SafeAreaView
         style={{ flex: 1, padding: 16 }}
@@ -122,14 +114,10 @@ export default function EventsScreen() {
       />
 
       <Text style={{ marginBottom: 12, fontSize: 14 }}>
-        Long-press an event to save it. Saved: {savedIds.length}
+        Swipe or long-press an event to save it. Saved: {savedIds.length}
       </Text>
 
-      {isError && (
-        <Text style={{ color: 'red', marginBottom: 12 }}>
-          Could not refresh events: {error?.message}
-        </Text>
-      )}
+      
 
       <FlatList
         data={filteredEvents}
@@ -142,7 +130,7 @@ export default function EventsScreen() {
           <EventRow
             event={item}
             onPress={() => router.push(`/events/${item.id}`)}
-            onLongPress={() => toggleSaved(item.id)}
+            onToggleSaved={() => toggleSaved(item.id)}
             saved={savedIds.includes(item.id)}
           />
         )}
